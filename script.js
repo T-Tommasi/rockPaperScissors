@@ -35,3 +35,28 @@ console.log(computerResponse) //returns the value chosen by the computer
 
 //function that estabilish player selection
 let playerResponse = prompt('Choose your weapon!','Rock')
+
+//function that estabilish who wins
+function playRound(computerResponse, playerResponse) {
+    if (playerResponse == 'rock' && computerResponse == 'scissors') {
+        return 'You won! - Rock beats scissors!'
+    } else if (playerResponse == 'rock' && computerResponse == 'paper') {
+        return 'You lose! - Paper beats rock!'
+    } else if (playerResponse == 'rock' && computerResponse == 'rock') {
+        return 'Draw! - none of you wins!'
+    } else if (playerResponse == 'paper' &&  computerResponse == 'scissors') {
+        return 'You lose! - Scissors beat paper!'
+    } else if (playerResponse == 'paper' && computerResponse == 'rock') {
+        return 'You win! - Paper beats rock!'
+    } else if (playerResponse == 'paper' && computerResponse == 'paper') {
+        return 'Draw! - none of you wins!'
+    } else if (playerResponse == 'scissors' && computerResponse  == 'paper') {
+        return 'You win! - Scissors beat paper!'
+    } else if (playerResponse == 'scissors' && computerResponse == 'rock'){
+        return 'You lose! - Rock beats scissors'
+    } else if (playerResponse == 'scissors' && computerResponse == 'scissors'){
+        return 'Draw! - none of you wins!'
+    } else {return 'There is an error here, no right answer was found!'}
+}
+
+console.log(playRound(computerResponse.toLowerCase(),playerResponse.toLowerCase())) //Should give back a somewhat working game
