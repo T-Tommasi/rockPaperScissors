@@ -1,0 +1,23 @@
+* {
+    border: red 1px solid;
+}
+
+body {
+    padding: 0% 2%;
+}
+
+.container .buttons {
+    display: flex;
+}
+
+.container {
+    flex-direction: column;
+}
+
+.buttons {
+    justify-content: space-around;
+}
+
+.buttons button  {
+    border-radius: 8px;
+}
