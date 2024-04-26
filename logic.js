@@ -1,33 +1,36 @@
 //Array of possible answers for the PC, and other usefull vars
-let answers = ['rock','paper','scissors'];
+const ANSWERS = ['rock','paper','scissors'];
 let playerScore = 0;
 let computerScore = 0;
-const win = `You won! `;
-const lose = `You lost! `;
-const draw = `It's a draw! `;
+const WIN_MESSAGE = `You won! `;
+const LOSE_MESSAGE = `You lost! `;
+const DRAW_MESSAGE = `It's a draw! `;
 const statusDiv = document.querySelector('.gameStatus');
+const PLAYER_ROCK = document.querySelector('#rock');
+const PLAYER_PAPER = document.querySelector('#paper');
+const PLAYER_SCISSORS = document.querySelector('#scissors');
 
 //Function for choosing a random answer from the array
-function pcResponse (answers) {
-    let pcPlay = answers[Math.floor(Math.random()*answers.length)]
+function pcResponse (ANSWERS) {
+    let pcPlay = ANSWERS[Math.floor(Math.random()*ANSWERS.length)]
     return pcPlay
 };
 
 //Test on console if the function is working properly
-console.log(pcResponse(answers));
+console.log(pcResponse(ANSWERS));
 
 //Function for playing a round of RPS
 function playRound(pcAnswer,playerAnswer) {
     if (playerAnswer == 'rock' && pcAnswer == 'scissors' ||
     playerAnswer == 'paper' && pcAnswer == 'rock' ||
     playerAnswer == 'scissors' && pcAnswer == 'paper') {
-        return {message: win + playerAnswer + 'beat ' + pcAnswer, status: win}
+        return {message: WIN_MESSAGE + playerAnswer + 'beat ' + pcAnswer, status: win}
     } else if (playerAnswer == 'rock' && pcAnswer == 'paper' ||
     playerAnswer == 'paper' && pcAnswer == 'scissors' ||
     playerAnswer == 'scissors' && pcAnswer == 'rock') {
-        return {message: lose + pcAnswer + 'beat ' + playerAnswer, status: lose}
+        return {message: LOSE_MESSAGE + pcAnswer + 'beat ' + playerAnswer, status: lose}
     } else {
-        return {message: draw + pcAnswer + 'is the same as ' + playerAnswer, status: draw}
+        return {message: DRAW_MESSAGE + pcAnswer + 'is the same as ' + playerAnswer, status: draw}
     }
 }
 
@@ -35,13 +38,13 @@ function playRound(pcAnswer,playerAnswer) {
 function playGame (playerAnswer) {
     let result = playRound(playerAnswer,pcResponse(answers));
     if (result.includes('You won')) {
-        statusDiv.textContent = win.message
+        statusDiv.textContent = WIN_MESSAGE.message
         return ++playerScore
     } else if (result.includes('You lost')) {
-        statusDiv.textContent = lose.message
+        statusDiv.textContent = LOSE_MESSAGE.message
         return ++computerScore
     } else {
-        statusDiv.textContent = draw.message
+        statusDiv.textContent = DRAW_MESSAGE.message
     }
     if (playerScore == 5) {
         alert('You won the game, congratulations!')
@@ -56,3 +59,13 @@ function playGame (playerAnswer) {
     }
 }
 
+//Start the game and use the button selected by the player as his choiche of play
+PLAYER_ROCK.addEventListener('click', function () {
+    playGame('rock')
+});
+PLAYER_PAPER.addEventListener('click', function () {
+    playGame('paper')
+});
+PLAYER_SCISSORS.addEventListener('click', function () {
+    playGame('scissors')
+})
