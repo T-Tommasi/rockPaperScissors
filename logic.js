@@ -21,13 +21,13 @@ function playRound(pcAnswer,playerAnswer) {
     if (playerAnswer == 'rock' && pcAnswer == 'scissors' ||
     playerAnswer == 'paper' && pcAnswer == 'rock' ||
     playerAnswer == 'scissors' && pcAnswer == 'paper') {
-        return {message: win + playerAnswer + 'beat ' + pcAnswer}
+        return {message: win + playerAnswer + 'beat ' + pcAnswer, status: win}
     } else if (playerAnswer == 'rock' && pcAnswer == 'paper' ||
     playerAnswer == 'paper' && pcAnswer == 'scissors' ||
     playerAnswer == 'scissors' && pcAnswer == 'rock') {
-        return {message: lose + pcAnswer + 'beat ' + playerAnswer}
+        return {message: lose + pcAnswer + 'beat ' + playerAnswer, status: lose}
     } else {
-        return {message: draw + pcAnswer + 'is the same as ' + playerAnswer}
+        return {message: draw + pcAnswer + 'is the same as ' + playerAnswer, status: draw}
     }
 }
 
@@ -35,11 +35,24 @@ function playRound(pcAnswer,playerAnswer) {
 function playGame (playerAnswer) {
     let result = playRound(playerAnswer,pcResponse(answers));
     if (result.includes('You won')) {
-        statusDiv.textContent = win
+        statusDiv.textContent = win.message
+        return ++playerScore
     } else if (result.includes('You lost')) {
-        statusDiv.textContent = lose
+        statusDiv.textContent = lose.message
+        return ++computerScore
     } else {
-        statusDiv.textContent = draw
+        statusDiv.textContent = draw.message
+    }
+    if (playerScore == 5) {
+        alert('You won the game, congratulations!')
+        playerScore = 0
+        computerScore = 0
+        return
+    } else if  (computerScore == 5) {
+        alert('Damn! you lost the game!')
+        computerScore = 0
+        playerScore = 0
+        return
     }
 }
 
